@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Twitter
+//  Twitter https://apps.twitter.com/app/9509457
 //
 //  Created by Che Chao Hsu on 2/8/16.
 //  Copyright © 2016 Che Chao Hsu. All rights reserved.
@@ -20,23 +20,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onLogin(sender: AnyObject) {
-        // Clean before getting going
-        TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
-        // Implies signed-out, problem if timing off
-        TwitterClient.sharedInstance.fetchRequestTokenWithPath(
-            "oauth/request_token",
-            method: "GET",
-            callbackURL: NSURL(string: "cchtwitter://oauth"),
-            scope: nil,
-            success: {
-                (requestToken: BDBOAuth1Credential!) -> Void in
-                print("Got the request token")
-                var authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
-                // Handle to singleton app, could open app, app then decides routing
-                UIApplication.sharedApplication().openURL(authURL!)
-            }) {
-                (error: NSError!) -> Void in
-                print("Failed to get request token")
+        // Pass in closure: user or error
+        TwitterClient.sharedInstance.loginWithCompletion() {
+            (user: User?, error: NSError?) in   // ? if exist
+            if user != nil {
+                self.performSegueWithIdentifier("loginSegue", sender: self)
+            } else {
+                // handle login error
+            }
         }
     }
 }
