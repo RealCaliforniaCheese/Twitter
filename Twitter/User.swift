@@ -14,11 +14,13 @@ let userDidLoginNotification = "userDidLoginNotification"
 let userDidLogoutNotification = "userDidLogoutNotification"
 
 class User: NSObject {
+    var dictionary: NSDictionary
     var name: String?
     var screenname: String?
     var profileImageURL: NSURL?
     var tagline: String?
-    var dictionary: NSDictionary
+    var favourited: Bool?
+    var favouritesCount: Int?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
@@ -28,12 +30,13 @@ class User: NSObject {
         screenname = dictionary["screenname"] as? String
         let profileImageURLString = dictionary["profile_image_url"] as? String
         if profileImageURLString != nil {
-            print(profileImageURLString)
             profileImageURL = NSURL(string: profileImageURLString!)!
         } else {
             profileImageURL = nil
         }
         tagline = dictionary["description"] as? String
+        favourited = dictionary["favourited"] as? Bool
+        favouritesCount = dictionary["favourites_count"] as? Int
     }
     
     func logout() {
@@ -81,24 +84,3 @@ class User: NSObject {
         }
     }
 }
-
-
-/*
-let name: String?
-let address: String?
-let imageURL: NSURL?
-let categories: String?
-let distance: String?
-let ratingImageURL: NSURL?
-let reviewCount: NSNumber?
-
-init(dictionary: NSDictionary) {
-name = dictionary["name"] as? String
-
-let imageURLString = dictionary["image_url"] as? String
-if imageURLString != nil {
-imageURL = NSURL(string: imageURLString!)!
-} else {
-imageURL = nil
-}
-*/

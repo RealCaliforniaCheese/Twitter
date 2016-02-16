@@ -14,20 +14,25 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var statusTextLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favouritesCountLabel: UILabel!
     
     var tweet: Tweet! {
         didSet {
-            print((tweet.user?.profileImageURL!)!)
-            // profileImage.setImageWithURL((tweet.user?.profileImageURL!)!)
+            profileImage.setImageWithURL(tweet.user!.profileImageURL!)
             userLabel.text = tweet.user!.name!
             statusTextLabel.text = tweet.text
             createdAtLabel.text = tweet.createdAtString
+            retweetCountLabel.text = String(tweet.retweetCount!)
+            favouritesCountLabel.text = String(tweet.user!.favouritesCount!)
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        profileImage.layer.cornerRadius = 5
+        profileImage.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
