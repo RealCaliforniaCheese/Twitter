@@ -23,17 +23,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil {
             // Go to the logged-in/timeline screen
             print("Current user detected: \(User.currentUser?.name)")
-            var vc =
+            let vc =
             storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as UIViewController
             window?.rootViewController = vc // = arrow in storyboard
+            
+
         }
+        
+        // Set up the tab and navigation bar controllers
+//        var currController = window?.rootViewController
+//        
+//        let chatSB = UIStoryboard(name: "Chat", bundle: nil)
+//        let mainSB = UIStoryboard(name: "Main", bundle: nil)
+//        
+//        let tabBarController     = UITabBarController()
+//        var navigationController = UINavigationController(rootViewController: currController!)
+//        
+//        let profileNavController = mainSB.instantiateViewControllerWithIdentifier("profileNavController")   as UINavigationController
+//        let chatNavController    = chatSB.instantiateViewControllerWithIdentifier("chatInboxNavController") as UINavigationController
+//        
+//        tabBarController.viewControllers = [profileNavController, chatNavController, navigationController]
+//        window?.rootViewController = tabBarController
         
         return true
     }
     
     func userDidLogout() {
-        var vc = storyboard.instantiateInitialViewController()! as UIViewController
-         window?.rootViewController = vc
+        let vc = storyboard.instantiateInitialViewController()! as UIViewController
+        window?.rootViewController = vc
     }
 
     func applicationWillResignActive(application: UIApplication) {

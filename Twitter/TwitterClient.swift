@@ -40,7 +40,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                 var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
                 
                 for tweet in tweets {
-//                    print("text: \(tweet.text), created: \(tweet.createdAt), retweeted: \(tweet.retweetCount)")                    
+                    print("id: \(tweet.id), screen_name: \(tweet.user?.screenname), text: \(tweet.text), created: \(tweet.createdAt), favorites: \(tweet.favouritesCount), retweeted: \(tweet.retweetCount)")
                 }
                 completion(tweets: tweets, error: nil)
             },
@@ -48,6 +48,37 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print("error getting home timeline")
                 completion(tweets: nil, error: error)
                 
+        })
+    }
+    
+    func likeStatus(tweetID: Int, completion: (error: NSError?) -> ()) {
+        POST("/1.1/favorites/create.json", parameters: ["id": tweetID], success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            completion(error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, err: NSError!) -> Void in
+                completion(error: err)
+        })
+    }
+    
+    func unlikeStatus(tweetID: Int, completion: (error: NSError?) -> ()) {
+        POST("/1.1/favorites/destroy.json", parameters: ["id": tweetID], success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            completion(error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, err: NSError!) -> Void in
+                completion(error: err)
+        })
+    }
+    
+    func retweetStatus(tweetID: Int, completion: (retweetedTweetID: Int?, error: NSError?) -> ()) {
+        POST("/1.1/statuses/retweet/\(tweetID).json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            }, failure: { (operation: NSURLSessionDataTask?, err: NSError!) -> Void in
+                completion(retweetedTweetID: nil, error: err)
+        })
+    }
+    
+    func unretweetStatus(retweetedTweetID: Int, completion: (error: NSError?) -> ()) {
+        POST("/1.1/statuses/destroy/\(retweetedTweetID).json", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            completion(error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, err: NSError!) -> Void in
+                completion(error: err)
         })
     }
     
@@ -67,7 +98,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             success: {
                 (requestToken: BDBOAuth1Credential!) -> Void in
                 print("Got the request token")
-                var authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
                 // Handle to singleton app, could open app, app then decides routing
                 UIApplication.sharedApplication().openURL(authURL!)
             }) {
@@ -92,15 +123,15 @@ class TwitterClient: BDBOAuth1SessionManager {
                     "1.1/account/verify_credentials.json",
                     parameters: nil,
                     success: { (operation: NSURLSessionDataTask!, response: AnyObject?) -> Void in
-                        //                    print("user: \(response!)")
+                        // print("user: \(response!)")
                         // User logging in
                         var user = User(dictionary: response as! NSDictionary)
                         // Once deserialized
                         User.currentUser = user
-                        print("user: \(user.name)")
+                        // print("user: \(user.name)")
                         self.loginCompletion?(user: user, error: nil)
                     },  failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
-                        print("error getting current user")
+                        // print("error getting current user")
                         self.loginCompletion?(user: nil, error: error)
 
                 })

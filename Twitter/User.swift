@@ -19,7 +19,7 @@ class User: NSObject {
     var screenname: String?
     var profileImageURL: NSURL?
     var tagline: String?
-    var favourited: Bool?
+    var favorited: Bool? = false
     var favouritesCount: Int?
     
     init(dictionary: NSDictionary) {
@@ -27,16 +27,14 @@ class User: NSObject {
         
         // de-serialize dictionary into above var's
         name = dictionary["name"] as? String
-        screenname = dictionary["screenname"] as? String
+        screenname = dictionary["screen_name"] as? String
         let profileImageURLString = dictionary["profile_image_url"] as? String
         if profileImageURLString != nil {
             profileImageURL = NSURL(string: profileImageURLString!)!
-        } else {
-            profileImageURL = nil
         }
         tagline = dictionary["description"] as? String
-        favourited = dictionary["favourited"] as? Bool
-        favouritesCount = dictionary["favourites_count"] as? Int
+        favorited = dictionary["favorited"] as? Bool
+        favouritesCount = (dictionary["favourites_count"] as? Int) ?? 0
     }
     
     func logout() {

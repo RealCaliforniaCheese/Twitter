@@ -17,16 +17,19 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let logoImage:UIImage = UIImage(named: "Twitter_logo_blue_32")!
+        self.navigationItem.titleView = UIImageView(image: logoImage)
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 120 // ballpark in event of 1000's of data / teeny tiny scroll bar
+        tableView.estimatedRowHeight = 320 // ballpark in event of 1000's of data / teeny tiny scroll bar
 
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
-            self.tableView.reloadData()        })
-
+            self.tableView.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {

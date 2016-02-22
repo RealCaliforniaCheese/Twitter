@@ -12,7 +12,11 @@ import BDBOAuth1Manager
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
-        super.viewDidLoad()    }
+        super.viewDidLoad()
+        
+        let logoImage:UIImage = UIImage(named: "Twitter_logo_blue_32")!
+        self.navigationItem.titleView = UIImageView(image: logoImage)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

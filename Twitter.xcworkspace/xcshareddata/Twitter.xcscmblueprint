@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5B706107849EA0F027C47AC6E7237029182A2F53",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0505E8BE14D13A4EF29FCC39FF94FAC69D87C80A" : 0,
+    "5B706107849EA0F027C47AC6E7237029182A2F53" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DEA467B3-C240-4EED-A61A-E442F9074525",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0505E8BE14D13A4EF29FCC39FF94FAC69D87C80A" : "",
+    "5B706107849EA0F027C47AC6E7237029182A2F53" : "Twitter\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Twitter",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Twitter.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RealCaliforniaCheese\/Instagram.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0505E8BE14D13A4EF29FCC39FF94FAC69D87C80A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RealCaliforniaCheese\/Twitter.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5B706107849EA0F027C47AC6E7237029182A2F53"
+    }
+  ]
+}
